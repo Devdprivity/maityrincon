@@ -1,5 +1,5 @@
 APP_NAME=MaityRincon
-APP_ENV=prodction
+APP_ENV=production
 APP_KEY=base64:6cxHpOlaT1GyP3ICS6R1ahBaj1+YRkoSNWWewq+U/Ms=
 APP_DEBUG=false
 APP_URL=https://www.psicomaityrincon.com
