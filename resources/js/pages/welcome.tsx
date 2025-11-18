@@ -1,10 +1,6 @@
 import { Head } from '@inertiajs/react';
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, FormEvent, lazy, Suspense } from 'react';
 import Hero from '@/components/Hero';
-import PlanFolder from '@/components/PlanFolder';
-import TestimonialsCarousel from '@/components/TestimonialsCarousel';
-import InteractiveQuestions from '@/components/InteractiveQuestions';
-import WhatsAppWidget from '@/components/WhatsAppWidget';
 import Header from '@/components/Header';
 import NavbarMobile from '@/components/NavbarMobile';
 import {
@@ -17,9 +13,15 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+// Lazy load componentes pesados
+const PlanFolder = lazy(() => import('@/components/PlanFolder'));
+const TestimonialsCarousel = lazy(() => import('@/components/TestimonialsCarousel'));
+const InteractiveQuestions = lazy(() => import('@/components/InteractiveQuestions'));
+const WhatsAppWidget = lazy(() => import('@/components/WhatsAppWidget'));
+
 type TestType = 'hamilton' | 'beck-anxiety' | 'beck-depression' | null;
 
-// Componente de Test de Hamilton
+// Componente de Test de Hamilton (versión simplificada para modal)
 function HamiltonTest({ onClose }: { onClose: () => void }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -221,7 +223,7 @@ export default function Welcome() {
     const [showWidget, setShowWidget] = useState(false);
 
     useEffect(() => {
-        // Escuchar cuando la animación del hero termine
+        // Escuchar cuando la animación del hero termine (timeouts reducidos)
         const handleHeroComplete = () => {
             setTimeout(() => {
                 setShowTestimonials(true);
@@ -229,9 +231,9 @@ export default function Welcome() {
                     setShowQuestions(true);
                     setTimeout(() => {
                         setShowWidget(true);
-                    }, 500);
-                }, 800);
-            }, 500);
+                    }, 200);
+                }, 400);
+            }, 200);
         };
 
         window.addEventListener('heroAnimationComplete', handleHeroComplete);
@@ -274,27 +276,37 @@ export default function Welcome() {
                 {/* Sección 2: Testimonios */}
                 {showTestimonials && (
                     <div className="testimonials-section w-full h-screen overflow-hidden pt-safe-top pb-safe-bottom">
-                        <TestimonialsCarousel />
+                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#98ada4' }}></div></div>}>
+                            <TestimonialsCarousel />
+                        </Suspense>
                     </div>
                 )}
 
                 {/* Sección 3: Preguntas Interactivas */}
                 {showQuestions && (
                     <div className="questions-section w-full h-screen overflow-hidden pt-safe-top pb-safe-bottom">
-                        <InteractiveQuestions />
+                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#98ada4' }}></div></div>}>
+                            <InteractiveQuestions />
+                        </Suspense>
                     </div>
                 )}
 
                 {/* Sección 4: Planes (incluye Footer) */}
                 {showQuestions && (
                     <div className="plan-section w-full h-screen overflow-y-auto pt-safe-top pb-safe-bottom">
-                        <PlanFolder />
+                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#98ada4' }}></div></div>}>
+                            <PlanFolder />
+                        </Suspense>
                     </div>
                 )}
             </div>
 
             {/* WhatsApp Widget fijo */}
-            {showWidget && <WhatsAppWidget />}
+            {showWidget && (
+                <Suspense fallback={null}>
+                    <WhatsAppWidget />
+                </Suspense>
+            )}
 
             {/* Botones verticales de tests en el lado derecho - solo desktop */}
             <div className="hidden md:flex fixed right-0 top-1/2 -translate-y-1/2 flex-col gap-0 z-50">

@@ -1,7 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { Link } from '@inertiajs/react';
-import { gsap } from 'gsap';
-import PartnersCarousel from './PartnersCarousel';
+
+// Lazy load GSAP y PartnersCarousel
+let gsap: any;
+const loadGSAP = async () => {
+    if (!gsap) {
+        const gsapModule = await import('gsap');
+        gsap = gsapModule.gsap;
+    }
+    return gsap;
+};
+
+const PartnersCarousel = lazy(() => import('./PartnersCarousel'));
 
 export default function Hero() {
     const heroRef = useRef<HTMLDivElement>(null);
@@ -17,37 +27,39 @@ export default function Hero() {
     useEffect(() => {
         if (!heroRef.current) return;
 
-        const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        // Cargar GSAP de forma asíncrona
+        loadGSAP().then((gsap) => {
+            const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-        // Círculo + logo aparecen juntos
+        // Círculo + logo aparecen juntos (animación más rápida)
         tl.fromTo(
             circleGroupRef.current,
             { scale: 0, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.7)" }
+            { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }
         );
 
-        // Se mueven hacia la izquierda
+        // Se mueven hacia la izquierda (más rápido)
         tl.to(circleGroupRef.current, {
             x: -200,
-            duration: 1.2
+            duration: 0.8
         });
 
-        // Aparece texto "Maity Rincón"
+        // Aparece texto "Maity Rincón" (más rápido)
         tl.fromTo(
             textRef.current,
             { x: -300, opacity: 0 },
-            { x: 0, opacity: 1, duration: 1 },
-            "-=0.8"
+            { x: 0, opacity: 1, duration: 0.6 },
+            "-=0.6"
         );
 
-        // Breve pausa
-        tl.to({}, { duration: 0.5 });
+        // Breve pausa (reducida)
+        tl.to({}, { duration: 0.3 });
 
-        // Suben juntos con sincronización
+        // Suben juntos con sincronización (más rápido)
         tl.to([circleGroupRef.current, textRef.current], {
             y: -400,
             opacity: 0,
-            duration: 1.5,
+            duration: 1,
             ease: "power2.inOut",
             onComplete: () => {
                 setAnimationComplete(true);
@@ -62,24 +74,28 @@ export default function Hero() {
             { opacity: 1, duration: 1.5, ease: "power2.out" },
             "-=1"
         );
-
+        });
     }, []);
 
     // 🔹 Animación de texto y botones escalonada
     useEffect(() => {
         if (animationComplete && contentRef.current) {
-            const lines = contentRef.current.querySelectorAll('.fade-line');
-            gsap.fromTo(
-                lines,
-                { y: 40, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    stagger: 0.25,
-                    ease: "power3.out"
+            loadGSAP().then((gsap) => {
+                const lines = contentRef.current?.querySelectorAll('.fade-line');
+                if (lines) {
+                    gsap.fromTo(
+                        lines,
+                        { y: 40, opacity: 0 },
+                        {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            stagger: 0.15,
+                            ease: "power2.out"
+                        }
+                    );
                 }
-            );
+            });
         }
     }, [animationComplete]);
 
@@ -115,6 +131,8 @@ export default function Hero() {
                         src="/img/logo2blanco.png"
                         alt="Maity Rincón"
                         className="w-16 h-16 object-contain z-30"
+                        loading="eager"
+                        fetchPriority="high"
                     />
                 </div>
             </div>
@@ -155,41 +173,34 @@ export default function Hero() {
 
                     </div>
 
-                    <div className="fade-line flex flex-col gap-3 md:flex-row md:gap-4 items-stretch md:items-start px-4 md:px-0">
+                    <div className="fade-line flex flex-col gap-2.5 md:flex-row md:gap-4 items-stretch md:items-start px-4 md:px-0">
                         <Link
                             href="/services"
-                            className="inline-flex items-center justify-center px-6 py-4 md:px-8 backdrop-blur-sm font-medium rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group min-h-[56px] text-base md:text-lg"
+                            className="inline-flex items-center justify-center px-4 py-2.5 md:px-6 md:py-3 font-normal rounded-lg md:rounded-full transition-colors duration-200 text-sm md:text-base"
                             style={{ 
                                 backgroundColor: '#f2e7dd',
                                 color: '#5f0a3c'
                             }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = '#e8ddd0';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = '#f2e7dd';
+                            }}
                         >
                             <span>Conoce mis Servicios</span>
-                            <svg
-                                className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M9 5l7 7-7 7"
-                                />
-                            </svg>
                         </Link>
 
                         <Link
                             href="/contact"
-                            className="inline-flex items-center justify-center px-6 py-4 md:px-8 bg-transparent text-white font-medium rounded-full border-2 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 min-h-[56px] text-base md:text-lg"
+                            className="inline-flex items-center justify-center px-4 py-2.5 md:px-6 md:py-3 bg-transparent font-normal rounded-lg md:rounded-full border transition-colors duration-200 text-sm md:text-base"
                             style={{ 
                                 borderColor: '#98ada4',
                                 color: '#f2e7dd'
                             }}
                             onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(152, 173, 164, 0.2)';
-                                e.currentTarget.style.borderColor = '#e05353';
+                                e.currentTarget.style.backgroundColor = 'rgba(152, 173, 164, 0.15)';
+                                e.currentTarget.style.borderColor = '#98ada4';
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.backgroundColor = 'transparent';
@@ -203,7 +214,11 @@ export default function Hero() {
             )}
 
             {/* Partners Carousel */}
-            {animationComplete && <PartnersCarousel />}
+            {animationComplete && (
+                <Suspense fallback={null}>
+                    <PartnersCarousel />
+                </Suspense>
+            )}
 
             {/* Swipe Down Indicator */}
             {animationComplete && (
