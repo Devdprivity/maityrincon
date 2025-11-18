@@ -75,8 +75,8 @@ export default function BlogShow({
             
             if (!csrfToken) {
                 console.error('CSRF token not found');
-                return;
-            }
+            return;
+        }
 
             const response = await fetch(`/blog/${post.id}/like`, {
                 method: 'POST',
@@ -109,7 +109,7 @@ export default function BlogShow({
 
     const handleCommentSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         commentForm.post(`/blog/${post.id}/comments`, {
             onSuccess: () => {
                 commentForm.reset();
@@ -314,13 +314,13 @@ export default function BlogShow({
                             {/* Comments Section */}
                             <div className="space-y-6">
                                 {/* Comment Form */}
-                                <form
-                                    onSubmit={handleCommentSubmit}
+                                    <form
+                                        onSubmit={handleCommentSubmit}
                                     className="rounded-lg p-6 border-2"
                                     style={{ backgroundColor: '#f2e7dd', borderColor: '#98ada4' }}
-                                >
-                                    <div className="flex items-start space-x-4">
-                                        <div className="flex-shrink-0">
+                                    >
+                                        <div className="flex items-start space-x-4">
+                                            <div className="flex-shrink-0">
                                             <div className="flex h-10 w-10 items-center justify-center rounded-full font-semibold" style={{ background: 'linear-gradient(135deg, #98ada4, #e05353)', color: '#f2e7dd' }}>
                                                 {auth?.user?.name
                                                     ?.charAt(0)
@@ -352,28 +352,28 @@ export default function BlogShow({
                                                     </div>
                                                 </div>
                                             )}
-                                            <textarea
+                                                <textarea
                                                 value={commentForm.data.content}
                                                 onChange={(e) => commentForm.setData('content', e.target.value)}
-                                                placeholder="Escribe un comentario..."
+                                                    placeholder="Escribe un comentario..."
                                                 className="w-full resize-none rounded-lg border p-3"
                                                 style={{ borderColor: '#98ada4', '--tw-ring-color': '#98ada4' } as React.CSSProperties}
-                                                rows={3}
-                                            />
+                                                    rows={3}
+                                                />
                                             <div className="flex justify-end">
-                                                <button
-                                                    type="submit"
+                                                    <button
+                                                        type="submit"
                                                     disabled={commentForm.processing}
                                                     className="flex items-center rounded-lg px-4 py-2 transition-colors disabled:opacity-50"
                                                     style={{ background: 'linear-gradient(135deg, #98ada4, #e05353)', color: '#f2e7dd' }}
-                                                >
-                                                    <Send className="mr-2 h-4 w-4" />
-                                                    Comentar
-                                                </button>
+                                                    >
+                                                        <Send className="mr-2 h-4 w-4" />
+                                                        Comentar
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
 
                                 {/* Comments List */}
                                 {localComments.length > 0 && (

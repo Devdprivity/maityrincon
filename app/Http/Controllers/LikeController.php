@@ -33,19 +33,19 @@ class LikeController extends Controller
 
         // Para usuarios autenticados, usar user_id
         if ($userId) {
-            $existingLike = Like::where('user_id', $userId)->where('post_id', $post->id)->first();
+        $existingLike = Like::where('user_id', $userId)->where('post_id', $post->id)->first();
 
-            if ($existingLike) {
-                // Remover like
-                $existingLike->delete();
-                $liked = false;
-            } else {
-                // Agregar like
-                Like::create([
-                    'user_id' => $userId,
-                    'post_id' => $post->id,
-                ]);
-                $liked = true;
+        if ($existingLike) {
+            // Remover like
+            $existingLike->delete();
+            $liked = false;
+        } else {
+            // Agregar like
+            Like::create([
+                'user_id' => $userId,
+                'post_id' => $post->id,
+            ]);
+            $liked = true;
             }
         } else {
             // Para usuarios anónimos, usar IP + sesión para evitar duplicados

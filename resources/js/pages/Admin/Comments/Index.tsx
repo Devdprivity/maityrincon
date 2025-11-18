@@ -205,7 +205,7 @@ export default function CommentsIndex({ comments, filters }: Props) {
                                                     {comment.user.name}
                                                 </div>
                                                 <div className="text-xs truncate" style={{ color: '#706363' }}>
-                                                    ID: {comment.user.id}
+                                                        ID: {comment.user.id}
                                                 </div>
                                             </td>
                                             <td className="px-3 py-4">
@@ -253,13 +253,13 @@ export default function CommentsIndex({ comments, filters }: Props) {
                                                 <div className="flex items-center">
                                                     <Calendar className="mr-1 h-3 w-3 flex-shrink-0" style={{ color: '#706363' }} />
                                                     <span className="text-xs">
-                                                        {format(
-                                                            new Date(
-                                                                comment.created_at,
-                                                            ),
-                                                            'dd/MM/yyyy',
-                                                            { locale: es },
-                                                        )}
+                                                    {format(
+                                                        new Date(
+                                                            comment.created_at,
+                                                        ),
+                                                        'dd/MM/yyyy',
+                                                        { locale: es },
+                                                    )}
                                                     </span>
                                                 </div>
                                             </td>

@@ -37,7 +37,7 @@ class PostController extends Controller
         $query->orderBy($sortBy, $sortDirection);
 
         $posts = $query->paginate(10)->withQueryString();
-        
+
         // Agregar image_url a cada post
         $posts->getCollection()->transform(function ($post) {
             return $post->append('image_url');
