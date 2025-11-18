@@ -8,7 +8,6 @@ import {
     Clock,
     CheckCircle,
     FileText,
-    Eye,
     Share2
 } from 'lucide-react';
 import AppLayout from '@/layouts/app-layout';

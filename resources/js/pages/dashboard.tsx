@@ -6,7 +6,6 @@ import {
     BookOpen, 
     Plus, 
     Eye, 
-    BarChart3, 
     Settings, 
     MessageSquare, 
     Heart, 

@@ -23,10 +23,16 @@ interface Post {
     reading_time: number;
 }
 
+interface PaginationLink {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
 interface Props {
     posts: {
         data: Post[];
-        links: any[];
+        links: PaginationLink[];
         meta?: {
             total?: number;
             from?: number;

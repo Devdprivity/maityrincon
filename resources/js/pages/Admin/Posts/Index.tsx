@@ -3,13 +3,10 @@ import { useState } from 'react';
 import { 
     Plus, 
     Search, 
-    Filter, 
     Edit, 
     Trash2, 
-    Eye, 
     Calendar, 
     Star, 
-    MoreVertical,
     FileText,
     Clock,
     CheckCircle
@@ -30,11 +27,26 @@ interface Post {
     formatted_published_at: string;
 }
 
+interface PaginationLink {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
+interface PaginationMeta {
+    current_page: number;
+    from: number | null;
+    last_page: number;
+    per_page: number;
+    to: number | null;
+    total: number;
+}
+
 interface Props {
     posts: {
         data: Post[];
-        links: any[];
-        meta: any;
+        links: PaginationLink[];
+        meta: PaginationMeta;
     };
     filters: {
         status?: string;
@@ -46,9 +58,9 @@ interface Props {
 }
 
 export default function PostsIndex({ posts, filters }: Props) {
-    const [showFilters, setShowFilters] = useState(false);
     const [searchTerm, setSearchTerm] = useState(filters.search || '');
     const [statusFilter, setStatusFilter] = useState(filters.status || '');
+    const [featuredFilter, setFeaturedFilter] = useState(filters.featured || false);
 
     // Verificación de seguridad para posts
     if (!posts || !posts.data) {
@@ -64,8 +76,6 @@ export default function PostsIndex({ posts, filters }: Props) {
             </AppLayout>
         );
     }
-
-    const [featuredFilter, setFeaturedFilter] = useState(filters.featured || false);
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
@@ -86,12 +96,6 @@ export default function PostsIndex({ posts, filters }: Props) {
         }, {
             preserveState: true,
             replace: true,
-        });
-    };
-
-    const handleStatusToggle = (postId: number) => {
-        router.patch(`/admin/posts/${postId}/toggle-status`, {}, {
-            preserveState: true,
         });
     };
 
@@ -117,19 +121,6 @@ export default function PostsIndex({ posts, filters }: Props) {
                 return <FileText className="w-4 h-4" style={{ color: '#706363' }} />;
             default:
                 return <FileText className="w-4 h-4" style={{ color: '#706363' }} />;
-        }
-    };
-
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case 'published':
-                return 'text-white';
-            case 'scheduled':
-                return 'text-white';
-            case 'draft':
-                return 'text-white';
-            default:
-                return 'text-white';
         }
     };
 

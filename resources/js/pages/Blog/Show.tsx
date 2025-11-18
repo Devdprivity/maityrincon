@@ -56,12 +56,20 @@ export default function BlogShow({
     isLikedByUser,
 }: Props) {
     const page = usePage();
-    const auth = (page.props as any)?.auth || { user: null };
+    interface PageProps {
+        auth?: {
+            user?: {
+                id: number;
+                name: string;
+                email: string;
+            } | null;
+        };
+    }
+    const auth = (page.props as PageProps)?.auth || { user: null };
     
     
     const [localLikesCount, setLocalLikesCount] = React.useState(likesCount);
     const [localIsLiked, setLocalIsLiked] = React.useState(isLikedByUser);
-    const [localComments, setLocalComments] = React.useState(comments);
 
     const commentForm = useForm({
         content: '',
@@ -305,7 +313,7 @@ export default function BlogShow({
                                     <div className="flex items-center" style={{ color: '#706363' }}>
                                         <MessageCircle className="mr-2 h-5 w-5" />
                                         <span>
-                                            {localComments.length} comentarios
+                                            {comments.length} comentarios
                                         </span>
                                     </div>
                                 </div>
@@ -376,9 +384,9 @@ export default function BlogShow({
                                     </form>
 
                                 {/* Comments List */}
-                                {localComments.length > 0 && (
+                                {comments.length > 0 && (
                                     <div className="space-y-6">
-                                        {localComments.map((comment) => (
+                                        {comments.map((comment) => (
                                             <div
                                                 key={comment.id}
                                                 className="flex space-x-4"

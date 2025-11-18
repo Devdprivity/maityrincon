@@ -2,8 +2,8 @@ import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { Link } from '@inertiajs/react';
 
 // Lazy load GSAP y PartnersCarousel
-let gsap: any;
-const loadGSAP = async () => {
+let gsap: typeof import('gsap').gsap | null = null;
+const loadGSAP = async (): Promise<typeof import('gsap').gsap> => {
     if (!gsap) {
         const gsapModule = await import('gsap');
         gsap = gsapModule.gsap;

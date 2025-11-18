@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { 
     ArrowLeft, 
     Save, 
-    Eye, 
-    Calendar, 
     Star, 
     Image as ImageIcon,
     Upload,

@@ -31,7 +31,7 @@ export default function FloatingParticles({ count = 8, className = '' }: Floatin
             });
 
             // Animación continua de flotación
-            particles.forEach((particle, index) => {
+            particles.forEach((particle) => {
                 const tl = gsap.timeline({ repeat: -1 });
                 
                 tl.to(particle, {

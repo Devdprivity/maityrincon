@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react'
-import { Head, router } from '@inertiajs/react'
+import { Head } from '@inertiajs/react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -288,7 +288,7 @@ export default function BeckDepressionTest() {
 
             setSuccess(true)
             window.scrollTo({ top: 0, behavior: 'smooth' })
-        } catch (error) {
+        } catch {
             setErrors({ submit: 'Error al enviar el test. Por favor intenta de nuevo.' })
         } finally {
             setLoading(false)

@@ -81,27 +81,30 @@ const CardSwap: React.FC<CardSwapProps> = ({
   easing = 'elastic',
   children
 }) => {
-  const config =
-    easing === 'elastic'
-      ? {
-          ease: 'elastic.out(0.6, 0.9)',
-          durDrop: 1.8,
-          durMove: 1.8,
-          durReturn: 1.8,
-          promoteOverlap: 0.85,
-          returnDelay: 0.08
-        }
-      : {
-          ease: 'power2.inOut',
-          durDrop: 1.0,
-          durMove: 1.0,
-          durReturn: 1.0,
-          promoteOverlap: 0.45,
-          returnDelay: 0.15
-        };
+  const config = useMemo(
+    () =>
+      easing === 'elastic'
+        ? {
+            ease: 'elastic.out(0.6, 0.9)',
+            durDrop: 1.8,
+            durMove: 1.8,
+            durReturn: 1.8,
+            promoteOverlap: 0.85,
+            returnDelay: 0.08
+          }
+        : {
+            ease: 'power2.inOut',
+            durDrop: 1.0,
+            durMove: 1.0,
+            durReturn: 1.0,
+            promoteOverlap: 0.45,
+            returnDelay: 0.15
+          },
+    [easing]
+  );
 
   const childArr = useMemo(() => Children.toArray(children) as ReactElement<CardProps>[], [children]);
-  const refs = useMemo<CardRef[]>(() => childArr.map(() => React.createRef<HTMLDivElement>()), [childArr.length]);
+  const refs = useMemo<CardRef[]>(() => childArr.map(() => React.createRef<HTMLDivElement>()), [childArr]);
   const order = useRef<number[]>(Array.from({ length: childArr.length }, (_, i) => i));
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const intervalRef = useRef<number>();
@@ -174,7 +177,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
     }
 
     return () => clearInterval(intervalRef.current);
-  }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
+  }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, config, refs]);
 
   const rendered = childArr.map((child, i) =>
     isValidElement<CardProps>(child)
