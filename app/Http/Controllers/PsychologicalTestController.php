@@ -84,9 +84,9 @@ class PsychologicalTestController extends Controller
                 } elseif ($score < 25) {
                     return 'Ansiedad leve a moderada';
                 } elseif ($score < 30) {
-                    return 'Ansiedad moderada a grave';
+                    return 'Ansiedad moderada a severa';
                 } else {
-                    return 'Ansiedad muy grave';
+                    return 'Ansiedad muy severa';
                 }
 
             case PsychologicalTest::TYPE_BECK_ANXIETY:
@@ -97,7 +97,7 @@ class PsychologicalTestController extends Controller
                 } elseif ($score <= 25) {
                     return 'Ansiedad moderada';
                 } else {
-                    return 'Ansiedad grave';
+                    return 'Ansiedad severa';
                 }
 
             case PsychologicalTest::TYPE_BECK_DEPRESSION:
@@ -108,7 +108,7 @@ class PsychologicalTestController extends Controller
                 } elseif ($score <= 28) {
                     return 'Depresión moderada';
                 } else {
-                    return 'Depresión grave';
+                    return 'Depresión severa';
                 }
 
             default:
