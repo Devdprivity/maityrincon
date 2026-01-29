@@ -89,12 +89,12 @@ export default function Header() {
                         <Link href="/" className="flex items-center group">
                             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 border border-white/40 shadow-md group-hover:shadow-lg transition-all duration-300 overflow-visible">
                                 <img
-                                    src="/img/logonegro.png"
+                                    src="/img/15-8.png"
                                     alt="Maity Rincón"
                                     className="h-16 w-16 object-contain scale-150"
                                 />
                             </div>
-                            <span className="ml-3 text-xl font-semibold text-[#ffffff] drop-shadow-lg group-hover:text-[#7B8E8C] transition-colors duration-300" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6)' }}>
+                            <span className="ml-3 text-xl font-semibold text-[#f2e7dd] drop-shadow-lg group-hover:text-[#ffff] transition-colors duration-300" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6)' }}>
                               Maity Rincon Reinberg
                             </span>
                         </Link>

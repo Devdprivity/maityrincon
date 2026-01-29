@@ -34,7 +34,7 @@ export default function WhatsAppWidget() {
           onClick={() => setIsOpen(!isOpen)}
           className="rounded-full p-4 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 group relative overflow-visible"
           style={{ 
-            background: 'linear-gradient(135deg, #98ada4, #e05353)'
+            background: 'linear-gradient(135deg, #f2e7dd, #e05353)'
           }}
           aria-label="Abrir chat de WhatsApp"
         >
@@ -42,7 +42,7 @@ export default function WhatsAppWidget() {
             <X className="w-8 h-8 text-white" />
           ) : (
             <img
-              src="/img/logo2blanco.png"
+              src="/img/15-8.png"
               alt="WhatsApp"
               className="w-14 h-14 object-contain"
             />
@@ -51,7 +51,7 @@ export default function WhatsAppWidget() {
           {!isOpen && (
             <span 
               className="absolute inset-0 rounded-full opacity-75 animate-ping"
-              style={{ backgroundColor: '#98ada4' }}
+              style={{ backgroundColor: '#f2e7dd' }}
             ></span>
           )}
         </button>

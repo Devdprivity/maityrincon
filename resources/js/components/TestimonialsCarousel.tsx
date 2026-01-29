@@ -39,7 +39,6 @@ const testimonials: Testimonial[] = [
   }
 ];
 
-const bgColor = '#e05353';
 const textColor = '#f2e7dd';
 
 const TestimonialsCarousel: React.FC = () => {
@@ -48,7 +47,7 @@ const TestimonialsCarousel: React.FC = () => {
 
   useEffect(() => {
     const currentBackgroundRef = backgroundRef.current;
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -99,13 +98,11 @@ const TestimonialsCarousel: React.FC = () => {
       ref={backgroundRef}
       className="w-full h-full relative bg-cover bg-center bg-no-repeat flex items-center justify-center"
       style={{
-        backgroundImage: 'url(/img/DSC09268.jpg)',
+        backgroundImage: 'url(/img/maity-testimonio.png)',
         filter: 'grayscale(100%) brightness(150%)',
         opacity: 0
       }}
     >
-      {/* Overlay opcional para mejorar contraste */}
-      {/* <div className="absolute inset-0 bg-white/20"></div> */}
 
       {/* Desktop Testimonials View */}
       {showTestimonials && (
@@ -123,7 +120,16 @@ const TestimonialsCarousel: React.FC = () => {
           >
             {testimonials.map((testimonial, index) => (
               <Card key={index}>
-                <div className="h-full p-10 rounded-2xl flex flex-col justify-between" style={{ backgroundColor: bgColor, color: textColor }}>
+                <div
+                  className="h-full p-10 rounded-2xl flex flex-col justify-between relative overflow-hidden backdrop-blur-md"
+                  style={{
+                    backgroundColor: 'rgba(156, 1, 32, 0.92)',
+                    backdropFilter: 'blur(10px) saturate(180%)',
+                    border: '1px solid rgba(163, 9, 40, 0.9)',
+                    boxShadow: '0 8px 32px 0 rgba(255, 7, 58, 0.1), 0 0 20px rgba(255, 7, 58, 0.3)',
+                    color: textColor
+                  }}
+                >
                   {/* Quote icon */}
                   <div className="flex justify-start mb-5">
                     <Quote className="w-12 h-12" style={{ color: textColor, opacity: 0.6 }} />
@@ -156,8 +162,14 @@ const TestimonialsCarousel: React.FC = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[85vw] snap-center testimonial-card-mobile rounded-2xl p-6 flex flex-col justify-between"
-                style={{ backgroundColor: bgColor, color: textColor }}
+                className="flex-shrink-0 w-[85vw] snap-center testimonial-card-mobile rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden backdrop-blur-md"
+                style={{
+                  backgroundColor: 'rgba(255, 7, 58, 0.5)',
+                  backdropFilter: 'blur(10px) saturate(180%)',
+                  border: '1px solid rgba(255, 7, 58, 0.6)',
+                  boxShadow: '0 8px 32px 0 rgba(255, 7, 58, 0.4), 0 0 20px rgba(255, 7, 58, 0.3)',
+                  color: textColor
+                }}
               >
                 <div className="flex justify-start mb-4">
                   <Quote className="w-8 h-8" style={{ color: textColor, opacity: 0.6 }} />

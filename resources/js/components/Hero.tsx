@@ -109,7 +109,7 @@ export default function Hero() {
                 ref={backgroundRef}
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
                 style={{
-                    backgroundImage: 'url(/img/hero-bg.jpg)',
+                    backgroundImage: 'url(/img/maity-hero.png)',
                     opacity: animationComplete ? 1 : 0
                 }}
             >
@@ -124,11 +124,11 @@ export default function Hero() {
                 <div
                     ref={circleRef}
                     className="w-32 h-32 rounded-full shadow-2xl flex items-center justify-center relative"
-                    style={{ background: 'linear-gradient(135deg, #98ada4, #e05353)' }}
+                    style={{ background: 'linear-gradient(135deg, #f2e7dd, #e05353)' }}
                 >
                     <img
                         ref={logoRef}
-                        src="/img/logo2blanco.png"
+                        src="/img/15-8.png"
                         alt="Maity Rincón"
                         className="w-16 h-16 object-contain z-30"
                         loading="eager"
@@ -143,7 +143,7 @@ export default function Hero() {
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ml-32 z-20"
             >
                 <h1
-                    className="text-4xl md:text-6xl font-light text-white drop-shadow-lg"
+                    className="text-4xl md:text-6xl font-light text-[#f2e7dd] drop-shadow-lg"
                     style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.85), 0 0 12px rgba(0,0,0,0.7)' }}
                 >
                     Maity Rincón
@@ -213,13 +213,7 @@ export default function Hero() {
                 </div>
             )}
 
-            {/* Partners Carousel */}
-            {animationComplete && (
-                <Suspense fallback={null}>
-                    <PartnersCarousel />
-                </Suspense>
-            )}
-
+       
             {/* Swipe Down Indicator */}
             {animationComplete && (
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center animate-bounce">

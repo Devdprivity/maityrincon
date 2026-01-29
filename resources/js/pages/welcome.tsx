@@ -1,5 +1,6 @@
 import { Head } from '@inertiajs/react';
 import { useState, useEffect, lazy, Suspense } from 'react';
+import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import Header from '@/components/Header';
 import NavbarMobile from '@/components/NavbarMobile';
@@ -49,8 +50,8 @@ export default function Welcome() {
     }, []);
 
     return (
-        <>
-            <Head title="Psicóloga Clínica - Maity Rincón" />
+     <>
+            <Head title="Psicólogo Clínico - Maity Rincón" />
 
             {/* Header fijo - oculto en mobile */}
             <div className="hidden md:block">
@@ -62,10 +63,10 @@ export default function Welcome() {
                 <div className="container mx-auto px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #98ada4, #e05353)' }}>
-                            <img src="/img/logo2blanco.png" alt="Logo" className="w-6 h-6" />
+                            <img src="/img/15-8.png" alt="Logo" className="w-6 h-6" />
                         </div>
                         <div>
-                            <h1 className="text-sm font-semibold" style={{ color: '#5f0a3c' }}>Maity Rincón</h1>
+                            <h1 className="text-sm font-semibold" style={{ color: '#f2e7dd' }}>Maity Rincón</h1>
                             <p className="text-xs" style={{ color: '#706363' }}>Psicóloga Clínica</p>
                         </div>
                     </div>
@@ -87,7 +88,18 @@ export default function Welcome() {
                     </div>
                 )}
 
-                {/* Sección 3: Preguntas Interactivas */}
+
+
+                {/* Sección 3: Planes (incluye Footer) */}
+                {showQuestions && (
+                    <div className="plan-section w-full h-screen overflow-y-auto pt-safe-top pb-safe-bottom">
+                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#98ada4' }}></div></div>}>
+                            <PlanFolder />
+                        </Suspense>
+                    </div>
+                )}
+
+                {/* Sección 4: Preguntas Interactivas */}
                 {showQuestions && (
                     <div className="questions-section w-full h-screen overflow-hidden pt-safe-top pb-safe-bottom">
                         <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#98ada4' }}></div></div>}>
@@ -96,14 +108,10 @@ export default function Welcome() {
                     </div>
                 )}
 
-                {/* Sección 4: Planes (incluye Footer) */}
-                {showQuestions && (
-                    <div className="plan-section w-full h-screen overflow-y-auto pt-safe-top pb-safe-bottom">
-                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: '#98ada4' }}></div></div>}>
-                            <PlanFolder />
-                        </Suspense>
-                    </div>
-                )}
+                {/* Sección 5: Footer como sección scroll snap */}
+                <div className="footer-section scroll-snap-section hidden md:flex w-full h-screen items-stretch justify-stretch p-0 m-0">
+                    <Footer />
+                </div>
             </div>
 
             {/* WhatsApp Widget fijo */}
@@ -122,17 +130,17 @@ export default function Welcome() {
                         writingMode: 'vertical-rl',
                         textOrientation: 'mixed',
                         marginTop: '25px',
-                        background: 'linear-gradient(135deg, #98ada4, #e05353)',
-                        color: '#f2e7dd ',
-                        borderColor: '#5f0a3c'
+                        background: 'linear-gradient(135deg, #e05353, #f2e7dd',
+                        color: '#5f0a3c',
+                        borderColor: '#f2e7dd'
                     }}
                     onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #e05353, #98ada4)';
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #e05353, #f2e7dd';
                         e.currentTarget.style.borderColor = '#e05353';
                     }}
                     onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #98ada4, #e05353)';
-                        e.currentTarget.style.borderColor = '#5f0a3c';
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #e05353, #f2e7dd';
+                        e.currentTarget.style.borderColor = '#f2e7dd';
                     }}
                 >
                     <span className="text-[9px] font-semibold tracking-wide">Hamilton</span>
@@ -144,17 +152,17 @@ export default function Welcome() {
                         writingMode: 'vertical-rl',
                         textOrientation: 'mixed',
                         marginBottom: '25px',
-                        background: 'linear-gradient(135deg, #98ada4, #e05353)',
-                        color: '#f2e7dd ',
-                        borderColor: '#5f0a3c'
+                        background: 'linear-gradient(135deg, #e05353, #f2e7dd)',
+                        color: '#5f0a3c ',
+                        borderColor: '#f2e7dd'
                     }}
                     onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #e05353, #98ada4)';
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #e05353, #f2e7dd)';
                         e.currentTarget.style.borderColor = '#e05353';
                     }}
                     onMouseLeave={(e) => {
-                        e.currentTarget.style.background = 'linear-gradient(135deg, #98ada4, #e05353)';
-                        e.currentTarget.style.borderColor = '#5f0a3c';
+                        e.currentTarget.style.background = 'linear-gradient(135deg, #e05353, #f2e7dd)';
+                        e.currentTarget.style.borderColor = '#f2e7dd';
                     }}
                 >
                     <span className="text-[9px] font-semibold tracking-wide">Depresión</span>

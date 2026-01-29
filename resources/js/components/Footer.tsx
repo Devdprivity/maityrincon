@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+
+const PartnersCarousel = lazy(() => import('./PartnersCarousel'));
 
 export default function Footer() {
   const socialLinks = [
@@ -68,37 +70,38 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="hidden md:block relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #5f0a3c 0%, #706363 50%, #5f0a3c 100%)' }}>
+    <footer className="flex flex-col flex-grow h-full w-full relative overflow-hidden m-0 p-0" style={{ background: 'linear-gradient(135deg, #f2e7dd 0%, #f2e7dd 50%, #f2e7dd 100%)' }}>
       {/* Efecto de partículas sutiles */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: '#e05353' }}></div>
         <div className="absolute bottom-10 right-10 w-40 h-40 rounded-full blur-3xl" style={{ backgroundColor: '#98ada4' }}></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 flex flex-col min-h-0 justify-center" style={{ flex: 1 }}>
         {/* Contenido principal */}
         <div className="text-center mb-8">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 drop-shadow-lg">
+          <h3 className="text-2xl md:text-3xl font-bold text-[#5f0a3c] mb-3 drop-shadow-lg">
             Psicólogo clínico Maity Rincon Reinberg
           </h3>
-          <p className="text-base text-white/95 mb-6 drop-shadow-md font-medium">
+          <p className="text-base text-[#5f0a3c]/95 mb-6 drop-shadow-md font-medium">
             Psicología Clínica Profesional
           </p>
 
           {/* Redes sociales */}
-          <div className="flex justify-center space-x-4 mb-8">
+          <div className="flex justify-center space-x-4 mb-12">
             {socialLinks.map((social) => (
               <a
                 key={social.name}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white transition-all duration-300 p-3 rounded-full hover:bg-white/20 backdrop-blur-sm shadow-lg hover:shadow-xl hover:scale-110 bg-white/10 border border-white/20"
+                className="transition-all duration-300 p-3 rounded-full hover:bg-white/20 backdrop-blur-sm shadow-lg hover:shadow-xl hover:scale-110 bg-white/10 border border-white/20"
                 style={{ 
+                  color: '#5f0a3c',
                   '--hover-color': '#e05353'
                 } as React.CSSProperties & { '--hover-color': string }}
                 onMouseEnter={(e) => e.currentTarget.style.color = '#e05353'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#5f0a3c'}
                 aria-label={social.name}
               >
                 {social.icon}
@@ -107,9 +110,16 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Partners Carousel */}
+        <div className="mt-8">
+          <Suspense fallback={null}>
+            <PartnersCarousel variant="footer" />
+          </Suspense>
+        </div>
+
         {/* Separador */}
         <div className="border-t border-white/30 pt-6">
-          <p className="text-center text-sm text-white/90 drop-shadow-md">
+          <p className="text-center text-sm text-[#5f0a3c]/90 drop-shadow-md">
             Copyright © 2025 psicologomaityrincon.com - Diseñado por <a href="https://www.impulsa360.tech" target="_blank" rel="noopener noreferrer" className="underline transition-colors font-semibold hover:text-[#e05353]" style={{ color: 'inherit' }}>impulsa360.tech 🥇</a>.
           </p>
         </div>

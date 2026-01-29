@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
-export default function PartnersCarousel() {
+interface PartnersCarouselProps {
+  variant?: 'hero' | 'footer';
+}
+
+export default function PartnersCarousel({ variant = 'hero' }: PartnersCarouselProps = {}) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
 
@@ -64,8 +68,12 @@ export default function PartnersCarousel() {
     setLoadedImages(prev => [...prev, src]);
   };
 
+  const containerClass = variant === 'footer' 
+    ? "relative w-full max-w-5xl mx-auto px-4 mt-12 mb-8"
+    : "absolute bottom-24 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-5xl px-4";
+
   return (
-    <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-5xl px-4">
+    <div className={containerClass}>
       <div className="overflow-hidden">
         <div
           ref={trackRef}

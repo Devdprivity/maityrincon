@@ -1,4 +1,7 @@
+
 'use client';
+
+import Footer from "./Footer";
 
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';

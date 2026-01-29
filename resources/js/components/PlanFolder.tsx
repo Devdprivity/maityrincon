@@ -16,12 +16,12 @@ const plansOnline: Plan[] = [
   },
   {
     name: "Terapia Psicológica Online - Pareja",
-    price: "$80/mes",
+    price: "$60/mes",
     description: "Terapia psicológica online para parejas que desean fortalecer su comunicación, resolver conflictos y mejorar la relación. Enfoque profesional en vínculos afectivos, confianza y crecimiento conjunto. Mejora tu relación de pareja con acompañamiento experto."
   },
   {
     name: "Terapia Psicológica Online - Familiar",
-    price: "$100/mes",
+    price: "$80/mes",
     description: "Intervención psicológica online para familias que buscan mejorar la convivencia, resolver dificultades y promover el bienestar emocional de todos sus miembros. Espacio seguro para abordar dinámicas familiares, crianza y apoyo integral con enfoque profesional."
   },
 ];
@@ -29,17 +29,17 @@ const plansOnline: Plan[] = [
 const plansPresencial: Plan[] = [
   {
     name: "Terapia Psicológica Presencial - Individual",
-    price: "$65/mes",
+    price: "$50/mes",
     description: "Sesiones personalizadas de psicoterapia presencial para tu crecimiento personal, manejo de ansiedad, autoestima y bienestar emocional. Atención confidencial y adaptada a tus necesidades individuales. Ambiente seguro y profesional en consultorio para tu bienestar emocional."
   },
   {
     name: "Terapia Psicológica Presencial - Pareja",
-    price: "$100/mes",
+    price: "$70/mes",
     description: "Terapia psicológica presencial para parejas que desean fortalecer su comunicación, resolver conflictos y mejorar la relación. Enfoque profesional en vínculos afectivos, confianza y crecimiento conjunto. Mejora tu relación de pareja con acompañamiento experto en un espacio presencial."
   },
   {
     name: "Terapia Psicológica Presencial - Familiar",
-    price: "$130/mes",
+    price: "$100/mes",
     description: "Intervención psicológica presencial para familias que buscan mejorar la convivencia, resolver dificultades y promover el bienestar emocional de todos sus miembros. Espacio seguro y confortable en consultorio para abordar dinámicas familiares, crianza y apoyo integral con enfoque profesional."
   },
 ];
@@ -48,7 +48,7 @@ const PlanFolder: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [planType, setPlanType] = useState<"online" | "presencial">("online");
   const containerRef = React.useRef<HTMLDivElement>(null);
-  
+
   const plans = planType === "online" ? plansOnline : plansPresencial;
 
   const handlePlanClick = (plan: Plan) => setSelectedPlan(plan);
@@ -66,8 +66,8 @@ const PlanFolder: React.FC = () => {
             setTimeout(() => {
               gsap.fromTo(
                 ".plan-card",
-                { 
-                  y: 100, 
+                {
+                  y: 100,
                   opacity: 0,
                   scale: 0.8
                 },
@@ -112,7 +112,7 @@ const PlanFolder: React.FC = () => {
   useEffect(() => {
     gsap.fromTo(
       ".plan-card",
-      { 
+      {
         opacity: 0,
         y: 50,
         scale: 0.9
@@ -132,7 +132,7 @@ const PlanFolder: React.FC = () => {
     <div
       ref={containerRef}
       className="w-full h-full relative flex flex-col bg-cover bg-center"
-      style={{ backgroundImage: "url('/img/DSC09126.jpg')" }}
+      style={{ backgroundImage: "url('/img/maity-price.png')" }}
     >
       {/* Contenido principal */}
       <div className="flex-1 flex flex-col items-center justify-center pt-20">
@@ -142,7 +142,7 @@ const PlanFolder: React.FC = () => {
             onClick={() => setPlanType("online")}
             className="px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-md"
             style={{
-              backgroundColor: planType === "online" ? "#98ada4" : "transparent",
+              backgroundColor: planType === "online" ? "#e05353" : "transparent",
               color: planType === "online" ? "#f2e7dd" : "rgba(242, 231, 221, 0.8)",
               transform: planType === "online" ? "scale(1.05)" : "scale(1)"
             }}
@@ -153,7 +153,7 @@ const PlanFolder: React.FC = () => {
             onClick={() => setPlanType("presencial")}
             className="px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-md"
             style={{
-              backgroundColor: planType === "presencial" ? "#98ada4" : "transparent",
+              backgroundColor: planType === "presencial" ? "#e05353" : "transparent",
               color: planType === "presencial" ? "#f2e7dd" : "rgba(242, 231, 221, 0.8)",
               transform: planType === "presencial" ? "scale(1.05)" : "scale(1)"
             }}
@@ -170,21 +170,21 @@ const PlanFolder: React.FC = () => {
                 key={index}
                 className="plan-card flex flex-col items-center justify-center text-center p-6 cursor-pointer hover:scale-105 transition-transform rounded-xl shadow-lg w-64 border-2"
                 onClick={() => handlePlanClick(plan)}
-                style={{ 
+                style={{
                   opacity: 0,
                   backgroundColor: '#f2e7dd',
-                  borderColor: '#98ada4'
+                  borderColor: '#e05353'
                 }}
                 onMouseEnter={(e) => e.currentTarget.style.borderColor = '#e05353'}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = '#98ada4'}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e05353'}
               >
                 <h3 className="font-bold text-lg mb-2" style={{ color: '#5f0a3c' }}>{plan.name}</h3>
                 <p className="font-bold text-2xl mb-3" style={{ color: '#e05353' }}>{plan.price}</p>
                 <p className="text-sm leading-relaxed mb-4" style={{ color: '#706363' }}>{plan.description}</p>
-                <button 
+                <button
                   className="mt-auto w-full font-semibold py-2 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg min-h-[48px]"
                   style={{
-                    background: 'linear-gradient(135deg, #98ada4, #e05353)',
+                    background: 'linear-gradient(135deg, #e05353, #e05353)',
                     color: '#f2e7dd'
                   }}
                 >
@@ -203,20 +203,20 @@ const PlanFolder: React.FC = () => {
                 key={index}
                 className="plan-card flex flex-col items-center justify-center text-center p-6 cursor-pointer active:scale-95 transition-transform rounded-xl shadow-lg flex-shrink-0 w-[85vw] snap-center border-2 mobile-card"
                 onClick={() => handlePlanClick(plan)}
-                style={{ 
+                style={{
                   opacity: 0,
                   backgroundColor: '#f2e7dd',
-                  borderColor: '#98ada4'
+                  borderColor: '#f2e7dd'
                 }}
               >
                 <h3 className="font-bold text-lg mb-2" style={{ color: '#5f0a3c' }}>{plan.name}</h3>
                 <p className="font-bold text-2xl mb-3" style={{ color: '#e05353' }}>{plan.price}</p>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: '#706363' }}>{plan.description}</p>
-                <button 
+                <p className="text-sm leading-relaxed mb-4" style={{ color: '#f2e7dd' }}>{plan.description}</p>
+                <button
                   className="mt-auto w-full font-semibold py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg min-h-[48px] text-base"
                   style={{
-                    background: 'linear-gradient(135deg, #98ada4, #e05353)',
-                    color: '#f2e7dd'
+                    background: 'linear-gradient(135deg, #f2e7dd)',
+                    color: '#e05353'
                   }}
                 >
                   Ver detalles
@@ -227,26 +227,22 @@ const PlanFolder: React.FC = () => {
         </div>
       </div>
 
-      {/* Footer al final del componente - Solo visible en desktop */}
-      <div className="hidden md:block">
-        <Footer />
-      </div>
 
       {selectedPlan && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50 p-4 md:p-0">
-          <div className="rounded-2xl p-6 w-full max-w-md md:w-80 shadow-2xl relative border-2 mobile-modal" style={{ backgroundColor: '#f2e7dd', borderColor: '#98ada4', maxHeight: '90vh', overflowY: 'auto' }}>
+          <div className="rounded-2xl p-6 w-full max-w-md md:w-80 shadow-2xl relative border-2 mobile-modal" style={{ backgroundColor: '#f2e7dd', borderColor: '#e05353', maxHeight: '90vh', overflowY: 'auto' }}>
             <button
               onClick={closeModal}
               className="absolute top-3 right-3 text-xl transition-colors z-10 min-w-[44px] min-h-[44px] flex items-center justify-center"
-              style={{ color: '#98ada4' }}
+              style={{ color: '#e05353' }}
               onMouseEnter={(e) => e.currentTarget.style.color = '#e05353'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#98ada4'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#e05353'}
             >
               ✕
             </button>
 
             {/* Header con gradiente */}
-            <div className="rounded-xl p-4 mb-4 -m-2" style={{ background: 'linear-gradient(135deg, #98ada4, #e05353)' }}>
+            <div className="rounded-xl p-4 mb-4 -m-2" style={{ background: 'linear-gradient(135deg, #e05353, #e05353)' }}>
               <h2 className="text-lg md:text-xl font-bold" style={{ color: '#f2e7dd' }}>{selectedPlan.name}</h2>
               <p className="text-base md:text-lg font-semibold" style={{ color: '#5f0a3c' }}>{selectedPlan.price}</p>
             </div>
@@ -259,7 +255,7 @@ const PlanFolder: React.FC = () => {
               rel="noopener noreferrer"
               className="block w-full text-center font-semibold py-4 md:py-3 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[56px] flex items-center justify-center text-base"
               style={{
-                background: 'linear-gradient(135deg, #98ada4, #e05353)',
+                background: 'linear-gradient(135deg, #e05353, #e05353)',
                 color: '#f2e7dd'
               }}
             >
