@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { gsap } from "gsap";
+import { X } from "lucide-react";
 import Footer from "./Footer";
 
 interface Plan {
@@ -211,7 +212,7 @@ const PlanFolder: React.FC = () => {
               >
                 <h3 className="font-bold text-lg mb-2" style={{ color: '#5f0a3c' }}>{plan.name}</h3>
                 <p className="font-bold text-2xl mb-3" style={{ color: '#e05353' }}>{plan.price}</p>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: '#f2e7dd' }}>{plan.description}</p>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: '#706363' }}>{plan.description}</p>
                 <button
                   className="mt-auto w-full font-semibold py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg min-h-[48px] text-base"
                   style={{
@@ -233,12 +234,11 @@ const PlanFolder: React.FC = () => {
           <div className="rounded-2xl p-6 w-full max-w-md md:w-80 shadow-2xl relative border-2 mobile-modal" style={{ backgroundColor: '#f2e7dd', borderColor: '#e05353', maxHeight: '90vh', overflowY: 'auto' }}>
             <button
               onClick={closeModal}
-              className="absolute top-3 right-3 text-xl transition-colors z-10 min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="absolute top-4 right-4 z-20 p-2 bg-white/90 rounded-full shadow-lg hover:bg-white transition-all duration-300 transform hover:scale-110"
               style={{ color: '#e05353' }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#e05353'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#e05353'}
+              aria-label="Cerrar modal"
             >
-              ✕
+              <X className="w-6 h-6" />
             </button>
 
             {/* Header con gradiente */}

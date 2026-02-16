@@ -1,10 +1,10 @@
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
-import { 
-    Search, 
-    Calendar, 
-    Clock, 
-    Star, 
+import {
+    Search,
+    Calendar,
+    Clock,
+    Star,
     ArrowRight,
     FileText
 } from 'lucide-react';
@@ -70,7 +70,7 @@ export default function BlogIndex({ posts, featuredPosts, filters }: Props) {
     };
 
     return (
-        <Layout title="Blog - Psicología Clínica">
+        <Layout title="Blog - Psicología Clínica" hideFooterOnMobile={true}>
             {/* Mobile Header simplificado */}
             <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm safe-area-top">
                 <div className="container mx-auto px-4 py-3 flex items-center justify-between">
@@ -88,7 +88,7 @@ export default function BlogIndex({ posts, featuredPosts, filters }: Props) {
 
             {/* Hero Section */}
             <section className="relative py-12 md:py-20 bg-cover bg-center bg-no-repeat overflow-hidden pt-safe-top md:pt-0">
-                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/img/DSC09263.jpg)' }}></div>
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/img/DSC09263.png)' }}></div>
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="container mx-auto px-4 md:px-6 relative z-10">
                     <div className="max-w-4xl mx-auto text-center">
@@ -96,7 +96,7 @@ export default function BlogIndex({ posts, featuredPosts, filters }: Props) {
                         <p className="text-base md:text-xl text-white/90 mb-6 md:mb-8 drop-shadow-md px-2">
                             Artículos especializados sobre salud mental, bienestar emocional y desarrollo personal
                         </p>
-                        
+
                         {/* Búsqueda */}
                         <form onSubmit={handleSearch} className="max-w-md mx-auto px-4 md:px-0">
                             <div className="relative">
@@ -124,7 +124,7 @@ export default function BlogIndex({ posts, featuredPosts, filters }: Props) {
                                 <Star className="w-5 h-5 md:w-6 md:h-6 mr-2 md:mr-3" style={{ color: '#e05353' }} />
                                 <h2 className="text-2xl md:text-3xl font-light" style={{ color: '#5f0a3c' }}>Artículos Destacados</h2>
                             </div>
-                            
+
                             <div className="grid md:grid-cols-3 gap-4 md:gap-8">
                                 {featuredPosts.map((post) => (
                                     <article key={post.id} className="rounded-2xl md:rounded-3xl overflow-hidden active:scale-95 transition-all duration-300 border-2 shadow-lg mobile-card" style={{ backgroundColor: '#f2e7dd', borderColor: '#98ada4' }}>
@@ -140,7 +140,7 @@ export default function BlogIndex({ posts, featuredPosts, filters }: Props) {
                                                 />
                                             </div>
                                         )}
-                                        
+
                                         <div className="p-4 md:p-6">
                                             <div className="flex items-center text-xs md:text-sm mb-2 md:mb-3" style={{ color: '#706363', opacity: 0.8 }}>
                                                 <Calendar className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 flex-shrink-0" />
@@ -148,21 +148,21 @@ export default function BlogIndex({ posts, featuredPosts, filters }: Props) {
                                                 <Clock className="w-3 h-3 md:w-4 md:h-4 ml-3 md:ml-4 mr-1 md:mr-2 flex-shrink-0" />
                                                 <span>{post.reading_time} min</span>
                                             </div>
-                                            
+
                                             <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3 line-clamp-2" style={{ color: '#5f0a3c' }}>
                                                 {post.title}
                                             </h3>
-                                            
+
                                             {post.subtitle && (
                                                 <p className="mb-3 md:mb-4 text-sm md:text-base line-clamp-2" style={{ color: '#706363' }}>
                                                     {post.subtitle}
                                                 </p>
                                             )}
-                                            
+
                                             <p className="mb-3 md:mb-4 text-sm md:text-base line-clamp-3" style={{ color: '#706363' }}>
                                                 {post.excerpt}
                                             </p>
-                                            
+
                                             <Link
                                                 href={`/blog/${post.slug}`}
                                                 className="font-medium flex items-center text-sm md:text-base transition-colors"
@@ -219,7 +219,7 @@ export default function BlogIndex({ posts, featuredPosts, filters }: Props) {
                                                 />
                                             </div>
                                         )}
-                                        
+
                                         <div className="p-4 md:p-6">
                                             <div className="flex items-center justify-between mb-2 md:mb-3">
                                                 <div className="flex items-center text-xs md:text-sm" style={{ color: '#706363', opacity: 0.8 }}>
@@ -231,21 +231,21 @@ export default function BlogIndex({ posts, featuredPosts, filters }: Props) {
                                                     <span>{post.reading_time} min</span>
                                                 </div>
                                             </div>
-                                            
+
                                             <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3 line-clamp-2" style={{ color: '#5f0a3c' }}>
                                                 {post.title}
                                             </h3>
-                                            
+
                                             {post.subtitle && (
                                                 <p className="mb-3 md:mb-4 text-sm md:text-base line-clamp-2" style={{ color: '#706363' }}>
                                                     {post.subtitle}
                                                 </p>
                                             )}
-                                            
+
                                             <p className="mb-3 md:mb-4 text-sm md:text-base line-clamp-3" style={{ color: '#706363' }}>
                                                 {post.excerpt}
                                             </p>
-                                            
+
                                             <Link
                                                 href={`/blog/${post.slug}`}
                                                 className="font-medium flex items-center text-sm md:text-base transition-colors"

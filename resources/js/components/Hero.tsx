@@ -31,49 +31,49 @@ export default function Hero() {
         loadGSAP().then((gsap) => {
             const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-        // Círculo + logo aparecen juntos (animación más rápida)
-        tl.fromTo(
-            circleGroupRef.current,
-            { scale: 0, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }
-        );
+            // Círculo + logo aparecen juntos (animación más rápida)
+            tl.fromTo(
+                circleGroupRef.current,
+                { scale: 0, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }
+            );
 
-        // Se mueven hacia la izquierda (más rápido)
-        tl.to(circleGroupRef.current, {
-            x: -200,
-            duration: 0.8
-        });
+            // Se mueven hacia la izquierda (más rápido)
+            tl.to(circleGroupRef.current, {
+                x: -200,
+                duration: 0.8
+            });
 
-        // Aparece texto "Maity Rincón" (más rápido)
-        tl.fromTo(
-            textRef.current,
-            { x: -300, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.6 },
-            "-=0.6"
-        );
+            // Aparece texto "Maity Rincón" (más rápido)
+            tl.fromTo(
+                textRef.current,
+                { x: -300, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.6 },
+                "-=0.6"
+            );
 
-        // Breve pausa (reducida)
-        tl.to({}, { duration: 0.3 });
+            // Breve pausa (reducida)
+            tl.to({}, { duration: 0.3 });
 
-        // Suben juntos con sincronización (más rápido)
-        tl.to([circleGroupRef.current, textRef.current], {
-            y: -400,
-            opacity: 0,
-            duration: 1,
-            ease: "power2.inOut",
-            onComplete: () => {
-                setAnimationComplete(true);
-                window.dispatchEvent(new CustomEvent('heroAnimationComplete'));
-            }
-        });
+            // Suben juntos con sincronización (más rápido)
+            tl.to([circleGroupRef.current, textRef.current], {
+                y: -400,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    setAnimationComplete(true);
+                    window.dispatchEvent(new CustomEvent('heroAnimationComplete'));
+                }
+            });
 
-        // Aparece fondo
-        tl.fromTo(
-            backgroundRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: 1.5, ease: "power2.out" },
-            "-=1"
-        );
+            // Aparece fondo
+            tl.fromTo(
+                backgroundRef.current,
+                { opacity: 0 },
+                { opacity: 1, duration: 1.5, ease: "power2.out" },
+                "-=1"
+            );
         });
     }, []);
 
@@ -102,14 +102,13 @@ export default function Hero() {
     return (
         <section
             ref={heroRef}
-            className="w-full h-full relative flex items-center justify-start overflow-hidden"
+            className="w-full h-full relative flex items-end md:items-center justify-start overflow-hidden pb-24 md:pb-0"
         >
             {/* Fondo */}
             <div
                 ref={backgroundRef}
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 bg-[url('/img/mobile/hero-mobile.png')] md:bg-[url('/img/maity-hero.png')]"
                 style={{
-                    backgroundImage: 'url(/img/maity-hero.png)',
                     opacity: animationComplete ? 1 : 0
                 }}
             >
@@ -157,16 +156,16 @@ export default function Hero() {
                     className="relative z-30 max-w-2xl pl-4 pr-4 md:pl-24 lg:pl-32 text-left mx-auto md:mx-0"
                 >
                     <div className="mb-6 md:mb-10">
-                        <h2 className="fade-line text-2xl md:text-5xl font-light text-white mb-4 leading-tight drop-shadow-lg px-4 md:px-0">
-                            <span className="block font-bold text-2xl md:text-5xl mb-2" style={{ color: '#f2e7dd' }}>
+                        <h2 className="fade-line text-xl md:text-5xl font-light text-white mb-4 leading-tight drop-shadow-lg px-4 md:px-0">
+                            <span className="block font-bold text-xl md:text-5xl mb-2" style={{ color: '#f2e7dd' }}>
                                 Consulta psicológica online & presencial
                             </span>
-                            <span className="block font-medium text-lg md:text-2xl mb-3" style={{ color: '#f2e7dd' }}>
+                            <span className="block font-medium text-base md:text-2xl mb-3" style={{ color: '#f2e7dd' }}>
                                 Terapia psicológica individual, pareja y familia
                             </span>
                         </h2>
 
-                        <p className="fade-line text-sm md:text-lg max-w-xl leading-relaxed drop-shadow-md mb-6 md:mb-4 font-medium px-4 md:px-0" style={{ color: '#f2e7dd' }}>
+                        <p className="fade-line text-xs md:text-lg max-w-xl leading-relaxed drop-shadow-md mb-6 md:mb-4 font-medium px-4 md:px-0" style={{ color: '#f2e7dd' }}>
                             Trauma • Estrés • Duelo • Depresión • Ansiedad • Autoestima • Fobias
                         </p>
 
@@ -177,7 +176,7 @@ export default function Hero() {
                         <Link
                             href="/services"
                             className="inline-flex items-center justify-center px-4 py-2.5 md:px-6 md:py-3 font-normal rounded-lg md:rounded-full transition-colors duration-200 text-sm md:text-base"
-                            style={{ 
+                            style={{
                                 backgroundColor: '#f2e7dd',
                                 color: '#5f0a3c'
                             }}
@@ -194,7 +193,7 @@ export default function Hero() {
                         <Link
                             href="/contact"
                             className="inline-flex items-center justify-center px-4 py-2.5 md:px-6 md:py-3 bg-transparent font-normal rounded-lg md:rounded-full border transition-colors duration-200 text-sm md:text-base"
-                            style={{ 
+                            style={{
                                 borderColor: '#98ada4',
                                 color: '#f2e7dd'
                             }}
@@ -213,7 +212,7 @@ export default function Hero() {
                 </div>
             )}
 
-       
+
             {/* Swipe Down Indicator */}
             {animationComplete && (
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center animate-bounce">

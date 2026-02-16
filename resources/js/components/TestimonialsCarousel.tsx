@@ -96,7 +96,7 @@ const TestimonialsCarousel: React.FC = () => {
   return (
     <div
       ref={backgroundRef}
-      className="w-full h-full relative bg-cover bg-center bg-no-repeat flex items-center justify-center"
+      className="w-full h-full relative bg-cover bg-center bg-no-repeat flex items-end md:items-center justify-center pb-24 md:pb-0"
       style={{
         backgroundImage: 'url(/img/maity-testimonio.png)',
         filter: 'grayscale(100%) brightness(150%)',

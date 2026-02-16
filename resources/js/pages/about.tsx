@@ -85,7 +85,7 @@ export default function About() {
     }, []);
 
     return (
-        <Layout title="Sobre Mí - Psicóloga Clínica">
+        <Layout title="Sobre Mí - Psicóloga Clínica" hideFooterOnMobile={true}>
             {/* Mobile Header simplificado */}
             <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm safe-area-top">
                 <div className="container mx-auto px-4 py-3 flex items-center justify-between">
@@ -103,7 +103,7 @@ export default function About() {
 
             {/* Header con efectos de paz */}
             <section className="relative py-12 md:py-20 bg-cover bg-center bg-no-repeat overflow-hidden pt-safe-top md:pt-0">
-                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/img/DSC09263.jpg)' }}></div>
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/img/DSC09263.png)' }}></div>
                 <div className="absolute inset-0 bg-black/20"></div>
                 <FloatingParticles count={6} />
                 <div className="container mx-auto px-4 md:px-6">
@@ -114,7 +114,7 @@ export default function About() {
                                 Volver al inicio
                             </Link>
                         </AnimatedText>
-                        
+
                         <AnimatedText animation="scaleIn" delay={0.4}>
                             <h2 className="text-base md:text-xl font-light text-white mb-4 md:mb-6 drop-shadow-lg px-2">Maity Rincón Reinberg | Psicólogo Clinico en Maracaibo | Terapia Online, Presencial, Individual y de Pareja.</h2>
                         </AnimatedText>
@@ -149,14 +149,14 @@ export default function About() {
                                         <span><span className="font-semibold">Mejorar tu calidad de vida</span> y tus relaciones interpersonales.</span>
                                     </li>
                                 </ul>
-                               
+
                             </div>
                             <div className="animate-item relative order-1 md:order-2">
-                                <div className="w-full h-64 md:h-96 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden" style={{ background: 'linear-gradient(135deg, #98ada4, #e05353)' }}>
+                                <div style={{ borderRadius: '45px', overflow: 'hidden' }} className="w-full h-94 md:h-96">
                                     <img
-                                        src="/img/DSC09263.jpg"
+                                        src="/img/maiti-sobremi.png"
                                         alt="Maity Rincón"
-                                        className="w-full h-full object-cover opacity-80 mix-blend-multiply"
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                             </div>
@@ -187,7 +187,7 @@ export default function About() {
                                 adaptados a tus necesidades y preferencias individuales. Mi objetivo es proporcionarte un espacio seguro y confidencial donde puedas explorar tus emociones, pensamientos y preocupaciones personales.
                             </p>
                             <p className="text-base md:text-lg leading-relaxed" style={{ color: '#706363' }}>
-                            Ya sea que prefieras la comodidad de las consultas online desde cualquier ubicación o la interacción cara a cara en mi consulta, te ofrezco un enfoque profesional y comprensivo para ayudarte a mejorar tu bienestar emocional y mental. Juntos podemos trabajar para superar obstáculos, desarrollar estrategias efectivas y alcanzar tus metas de una manera que se adapte mejor a tu estilo de vida y necesidades personales.
+                                Ya sea que prefieras la comodidad de las consultas online desde cualquier ubicación o la interacción cara a cara en mi consulta, te ofrezco un enfoque profesional y comprensivo para ayudarte a mejorar tu bienestar emocional y mental. Juntos podemos trabajar para superar obstáculos, desarrollar estrategias efectivas y alcanzar tus metas de una manera que se adapte mejor a tu estilo de vida y necesidades personales.
 
                             </p>
                         </div>
@@ -206,11 +206,11 @@ export default function About() {
                                 Tu espacio seguro y confidencial
                             </p>
                             <p className="text-base md:text-lg leading-relaxed mb-4" style={{ color: '#706363' }}>
-                            Me comprometo a ofrecerte un espacio de escucha activa y apoyo incondicional. Me centro en ayudarte a explorar y entender tus emociones y pensamientos, facilitando así tu proceso de autodescubrimiento y crecimiento personal.
+                                Me comprometo a ofrecerte un espacio de escucha activa y apoyo incondicional. Me centro en ayudarte a explorar y entender tus emociones y pensamientos, facilitando así tu proceso de autodescubrimiento y crecimiento personal.
 
                             </p>
                             <p className="text-base md:text-lg leading-relaxed" style={{ color: '#706363' }}>
-                            Con un enfoque integrador y basado en la evidencia, te proporciono herramientas prácticas y estrategias efectivas para manejar el estrés, mejorar tus relaciones y encontrar la claridad mental que necesitas para vivir una vida más equilibrada y satisfactoria. Estoy aquí para acompañarte hacia el bienestar emocional y personal, ayudándote a alcanzar tus metas y desarrollar todo tu potencial.
+                                Con un enfoque integrador y basado en la evidencia, te proporciono herramientas prácticas y estrategias efectivas para manejar el estrés, mejorar tus relaciones y encontrar la claridad mental que necesitas para vivir una vida más equilibrada y satisfactoria. Estoy aquí para acompañarte hacia el bienestar emocional y personal, ayudándote a alcanzar tus metas y desarrollar todo tu potencial.
 
                             </p>
                         </div>
@@ -450,8 +450,8 @@ export default function About() {
                 </div>
             </section>
 
-            
+
             <WhatsAppWidget />
-        </Layout>
+        </Layout >
     );
 }

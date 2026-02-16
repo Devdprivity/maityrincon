@@ -32,7 +32,7 @@ export default function InteractiveQuestions() {
     { id: 5, text: '¿Cómo agendar cita?', answer: 'Puedes agendar una cita conmigo para una consulta psicológica escribiéndome a mi número de contacto vía WhatsApp +58 4246287530.', x: '72%', y: '55%', shape: questionShape },
     { id: 7, text: '¿Qué enfoque usas?', answer: 'Utilizo un enfoque cognitivo-conductual, el cual se centra en identificar y cambiar patrones de pensamiento y comportamiento que puedan estar contribuyendo a tus dificultades emocionales. Este enfoque colaborativo y basado en la evidencia se adapta a tus necesidades únicas para promover tu crecimiento y bienestar emocional.', x: '76%', y: '70%', shape: questionShape },
     { id: 9, text: '¿Qué problemas tratas?', answer: 'En mi práctica, trato una amplia variedad de problemas, incluyendo ansiedad, depresión, estrés, problemas de relaciones interpersonales, duelos, procesos de adaptación, autoestima y regulación emocional.', x: '68%', y: '85%', shape: questionShape },
- 
+
     // Preguntas del lado izquierdo - más separadas y más hacia la izquierda
     { id: 10, text: '¿Ventajas presencial?', answer: 'Las ventajas de la terapia psicológica presencial incluyen una conexión más personal y directa conmigo como terapeuta, lo que facilita una comunicación más fluida y una comprensión más profunda de tus preocupaciones.', x: '28%', y: '15%', shape: questionShape },
     { id: 8, text: '¿Primera sesión?', answer: 'Durante nuestra primera sesión de terapia, puedes tener la oportunidad de compartir tus preocupaciones y objetivos terapéuticos conmigo, y juntos comenzaremos a desarrollar un plan de tratamiento personalizado.', x: '26%', y: '35%', shape: questionShape },
@@ -133,29 +133,34 @@ export default function InteractiveQuestions() {
   }, [activeQuestion]);
 
   return (
-    <section ref={containerRef} className="relative w-full h-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#f2e7dd' }}>
+    <section ref={containerRef} className="relative w-full h-full flex items-end md:items-center justify-center overflow-hidden pb-20 md:pb-0" style={{ backgroundColor: '#f2e7dd' }}>
 
       {/* Imagen de fondo */}
-      <img src="/img/DSC09226.png" alt="Fondo Maity" className="absolute inset-0 w-full h-full object-contain object-center z-0 hidden md:block" />
+      <img
+        src="/img/mobile/Preguntas-mobile.png"
+        alt="Fondo Maity Mobile"
+        className="absolute inset-0 w-full h-full object-cover object-center z-0 block md:hidden"
+      />
+      <img
+        src="/img/DSC09226.png"
+        alt="Fondo Maity Desktop"
+        className="absolute inset-0 w-full h-full object-cover object-center z-0 hidden md:block"
+      />
 
 
       {/* Vista móvil */}
       <div className="block md:hidden text-center z-10 px-6">
-        <div className="mb-8">
-          <div className="flex justify-center mb-6">
-            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-2xl">
-              <span className="text-6xl text-green-600">?</span>
-            </div>
-          </div>
-          <h2 className="text-3xl font-bold mb-4" style={{ color: '#5f0a3c' }}>Preguntas Frecuentes</h2>
-          <p className="text-lg mb-8" style={{ color: '#706363' }}>Encuentra respuestas a tus dudas</p>
+        <div className="mb-4">
+
+          <h2 className="text-2xl font-bold mb-2" style={{ color: '#5f0a3c' }}>Preguntas Frecuentes</h2>
+          <p className="text-sm mb-4" style={{ color: '#706363' }}>Encuentra respuestas a tus dudas</p>
         </div>
         <div className="grid grid-cols-1 gap-3 max-w-sm mx-auto">
           {questions.slice(0, 6).map((q) => (
             <button
               key={q.id}
               className="text-sm px-4 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-left font-bold border-2"
-              style={{ 
+              style={{
                 backgroundColor: '#e05353',
                 color: '#f2e7dd',
                 borderColor: '#5f0a3c'
@@ -189,7 +194,7 @@ export default function InteractiveQuestions() {
               alt="Question shape"
               className="w-full h-full object-contain filter drop-shadow-lg group-hover:drop-shadow-xl transition-all duration-300"
             />
-            
+
             {/* Texto superpuesto */}
             <div className="absolute inset-0 flex items-center justify-center p-8">
               <div className="text-center max-w-full px-3">

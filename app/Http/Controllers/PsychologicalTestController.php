@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestResultsMail;
+use App\Mail\TestResultsNotificationMail;
 use App\Models\PsychologicalTest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
@@ -81,33 +84,42 @@ class PsychologicalTestController extends Controller
             case PsychologicalTest::TYPE_HAMILTON_ANXIETY:
                 if ($score < 18) {
                     return 'Ansiedad ligera';
-                } elseif ($score < 25) {
+                }
+                elseif ($score < 25) {
                     return 'Ansiedad leve a moderada';
-                } elseif ($score < 30) {
+                }
+                elseif ($score < 30) {
                     return 'Ansiedad moderada a severa';
-                } else {
+                }
+                else {
                     return 'Ansiedad muy severa';
                 }
 
             case PsychologicalTest::TYPE_BECK_ANXIETY:
                 if ($score <= 7) {
                     return 'Ansiedad mínima';
-                } elseif ($score <= 15) {
+                }
+                elseif ($score <= 15) {
                     return 'Ansiedad leve';
-                } elseif ($score <= 25) {
+                }
+                elseif ($score <= 25) {
                     return 'Ansiedad moderada';
-                } else {
+                }
+                else {
                     return 'Ansiedad severa';
                 }
 
             case PsychologicalTest::TYPE_BECK_DEPRESSION:
                 if ($score <= 13) {
                     return 'Depresión mínima';
-                } elseif ($score <= 19) {
+                }
+                elseif ($score <= 19) {
                     return 'Depresión leve';
-                } elseif ($score <= 28) {
+                }
+                elseif ($score <= 28) {
                     return 'Depresión moderada';
-                } else {
+                }
+                else {
                     return 'Depresión severa';
                 }
 
@@ -119,11 +131,22 @@ class PsychologicalTestController extends Controller
     /**
      * Send results email
      */
-    private function sendResultsEmail(PsychologicalTest $test)
+    private function sendResultsEmail(PsychologicalTest $test): void
     {
-        // Aquí implementarías el envío del email
-        // Por ahora dejamos un placeholder
-        // Mail::to($test->email)->send(new TestResultsMail($test));
+        try {
+            // Email al paciente con sus resultados
+            Mail::to($test->email)->send(new TestResultsMail($test));
+
+            // Email de notificación al remitente (Maity) con los datos del paciente
+            Mail::to([config('mail.from.address'), 'psicomaityrincon@gmail.com'])->send(new TestResultsNotificationMail($test));
+        }
+        catch (\Exception $e) {
+            Log::error('Error enviando email de resultados del test', [
+                'test_id' => $test->id,
+                'email' => $test->email,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**
