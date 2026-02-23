@@ -35,10 +35,10 @@ jobs:
       - name: Deploy public/build via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          server: 82.25.67.41
+          username: u130594452
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./public/build/
-          server-dir: ${{ secrets.FTP_REMOTE_PATH }}
+          server-dir: public_html/public/build/
           dangerous-clean-slate: false
