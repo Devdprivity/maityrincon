@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, lazy, Suspense } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from '@inertiajs/react';
 
 // Lazy load GSAP y PartnersCarousel
@@ -11,7 +11,7 @@ const loadGSAP = async (): Promise<typeof import('gsap').gsap> => {
     return gsap;
 };
 
-const PartnersCarousel = lazy(() => import('./PartnersCarousel'));
+
 
 export default function Hero() {
     const heroRef = useRef<HTMLDivElement>(null);
