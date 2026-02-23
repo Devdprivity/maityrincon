@@ -41,4 +41,4 @@ jobs:
           port: 21
           local-dir: ./public/build/
           server-dir: public_html/public/build/
-          dangerous-clean-slate: false
+          dangerous-clean-slate: true
