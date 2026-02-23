@@ -9,7 +9,7 @@ interface Plan {
   description: string;
 }
 
-const plansOnline: Plan[] = [
+export const plansOnline: Plan[] = [
   {
     name: "Terapia Psicológica Online - Individual",
     price: "$50/mes",
@@ -27,7 +27,7 @@ const plansOnline: Plan[] = [
   },
 ];
 
-const plansPresencial: Plan[] = [
+export const plansPresencial: Plan[] = [
   {
     name: "Terapia Psicológica Presencial - Individual",
     price: "$50/mes",

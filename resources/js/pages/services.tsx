@@ -1,11 +1,24 @@
-import { Heart, Users, BookOpen, CheckCircle, ArrowLeft } from 'lucide-react';
+import { useState } from 'react';
+import { Heart, Users, BookOpen, CheckCircle, ArrowLeft, X } from 'lucide-react';
 import Layout from '../layouts/website';
 import { Link } from '@inertiajs/react';
 import FloatingParticles from '../components/FloatingParticles';
 import AnimatedText from '../components/AnimatedText';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
+import { plansOnline, plansPresencial } from '@/components/PlanFolder';
+
+interface Plan {
+    name: string;
+    price: string;
+    description: string;
+}
 
 export default function Services() {
+    const [planType, setPlanType] = useState<'online' | 'presencial'>('online');
+    const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+
+    const plans = planType === 'online' ? plansOnline : plansPresencial;
+
     return (
         <Layout title="Servicios - Psicóloga Clínica" hideFooterOnMobile={true}>
             {/* Mobile Header simplificado */}
@@ -300,76 +313,85 @@ export default function Services() {
             {/* Tarifas */}
             <section className="py-12 md:py-20 pb-safe-bottom-mobile" style={{ backgroundColor: '#f2e7dd' }}>
                 <div className="container mx-auto px-4 md:px-6">
-                    <div className="max-w-4xl mx-auto">
-                        <div className="text-center mb-8 md:mb-16">
+                    <div className="max-w-5xl mx-auto">
+                        <div className="text-center mb-8 md:mb-12">
                             <h2 className="text-3xl md:text-4xl font-light mb-3 md:mb-4" style={{ color: '#5f0a3c' }}>Tarifas</h2>
                             <p className="text-lg md:text-xl px-2" style={{ color: '#706363' }}>
                                 Inversión en tu bienestar emocional
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-4 md:gap-8">
-                            <div className="p-5 md:p-8 rounded-2xl md:rounded-3xl text-center border-2 shadow-lg mobile-card" style={{ backgroundColor: '#f2e7dd', borderColor: '#98ada4' }}>
-                                <h3 className="text-lg md:text-2xl font-light mb-3 md:mb-4" style={{ color: '#5f0a3c' }}>Consulta Individual</h3>
-                                <div className="text-3xl md:text-4xl font-light mb-3 md:mb-4" style={{ color: '#e05353' }}>$80</div>
-                                <div className="text-sm md:text-base mb-4 md:mb-6" style={{ color: '#706363' }}>por sesión de 50 minutos</div>
-                                <ul className="space-y-2 md:space-y-3 mb-6 md:mb-8" style={{ color: '#706363' }}>
-                                    <li className="flex items-center justify-center">
-                                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" style={{ color: '#98ada4' }} />
-                                        <span className="text-xs md:text-sm">Evaluación inicial</span>
-                                    </li>
-                                    <li className="flex items-center justify-center">
-                                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" style={{ color: '#98ada4' }} />
-                                        <span className="text-xs md:text-sm">Plan de tratamiento</span>
-                                    </li>
-                                    <li className="flex items-center justify-center">
-                                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" style={{ color: '#98ada4' }} />
-                                        <span className="text-xs md:text-sm">Seguimiento continuo</span>
-                                    </li>
-                                </ul>
+                        {/* Pestañas Online / Presencial */}
+                        <div className="flex justify-center mb-8">
+                            <div className="flex gap-4 backdrop-blur-sm rounded-full p-2 shadow-lg" style={{ backgroundColor: 'rgba(152, 173, 164, 0.3)' }}>
+                                <button
+                                    onClick={() => setPlanType('online')}
+                                    className="px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-md"
+                                    style={{
+                                        backgroundColor: planType === 'online' ? '#e05353' : 'transparent',
+                                        color: planType === 'online' ? '#f2e7dd' : 'rgba(95, 10, 60, 0.8)',
+                                        transform: planType === 'online' ? 'scale(1.05)' : 'scale(1)'
+                                    }}
+                                >
+                                    Online
+                                </button>
+                                <button
+                                    onClick={() => setPlanType('presencial')}
+                                    className="px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-md"
+                                    style={{
+                                        backgroundColor: planType === 'presencial' ? '#e05353' : 'transparent',
+                                        color: planType === 'presencial' ? '#f2e7dd' : 'rgba(95, 10, 60, 0.8)',
+                                        transform: planType === 'presencial' ? 'scale(1.05)' : 'scale(1)'
+                                    }}
+                                >
+                                    Presencial
+                                </button>
                             </div>
+                        </div>
 
-                            <div className="p-5 md:p-8 rounded-2xl md:rounded-3xl text-center border-2 shadow-lg mobile-card" style={{ backgroundColor: '#f2e7dd', borderColor: '#e05353' }}>
-                                <div className="px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium mb-3 md:mb-4 inline-block" style={{ background: 'linear-gradient(135deg, #98ada4, #e05353)', color: '#f2e7dd' }}>
-                                    Más Popular
+                        {/* Desktop: tarjetas en fila */}
+                        <div className="hidden md:flex flex-row gap-6 justify-center items-end">
+                            {plans.map((plan, index) => (
+                                <div
+                                    key={index}
+                                    className="flex flex-col items-center justify-center text-center p-6 cursor-pointer hover:scale-105 transition-transform rounded-xl shadow-lg w-64 border-2"
+                                    onClick={() => setSelectedPlan(plan)}
+                                    style={{ backgroundColor: '#f2e7dd', borderColor: '#e05353' }}
+                                >
+                                    <h3 className="font-bold text-lg mb-2" style={{ color: '#5f0a3c' }}>{plan.name}</h3>
+                                    <p className="font-bold text-2xl mb-3" style={{ color: '#e05353' }}>{plan.price}</p>
+                                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#706363' }}>{plan.description}</p>
+                                    <button
+                                        className="mt-auto w-full font-semibold py-2 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg min-h-[48px]"
+                                        style={{ background: 'linear-gradient(135deg, #e05353, #e05353)', color: '#f2e7dd' }}
+                                    >
+                                        Ver detalles
+                                    </button>
                                 </div>
-                                <h3 className="text-lg md:text-2xl font-light mb-3 md:mb-4" style={{ color: '#5f0a3c' }}>Terapia de Pareja</h3>
-                                <div className="text-3xl md:text-4xl font-light mb-3 md:mb-4" style={{ color: '#e05353' }}>$100</div>
-                                <div className="text-sm md:text-base mb-4 md:mb-6" style={{ color: '#706363' }}>por sesión de 60 minutos</div>
-                                <ul className="space-y-2 md:space-y-3 mb-6 md:mb-8" style={{ color: '#706363' }}>
-                                    <li className="flex items-center justify-center">
-                                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" style={{ color: '#e05353' }} />
-                                        <span className="text-xs md:text-sm">Evaluación de la relación</span>
-                                    </li>
-                                    <li className="flex items-center justify-center">
-                                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" style={{ color: '#e05353' }} />
-                                        <span className="text-xs md:text-sm">Mejora de comunicación</span>
-                                    </li>
-                                    <li className="flex items-center justify-center">
-                                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" style={{ color: '#e05353' }} />
-                                        <span className="text-xs md:text-sm">Resolución de conflictos</span>
-                                    </li>
-                                </ul>
-                            </div>
+                            ))}
+                        </div>
 
-                            <div className="p-5 md:p-8 rounded-2xl md:rounded-3xl text-center border-2 shadow-lg mobile-card" style={{ backgroundColor: '#f2e7dd', borderColor: '#98ada4' }}>
-                                <h3 className="text-lg md:text-2xl font-light mb-3 md:mb-4" style={{ color: '#5f0a3c' }}>Terapia Familiar</h3>
-                                <div className="text-3xl md:text-4xl font-light mb-3 md:mb-4" style={{ color: '#e05353' }}>$120</div>
-                                <div className="text-sm md:text-base mb-4 md:mb-6" style={{ color: '#706363' }}>por sesión de 75 minutos</div>
-                                <ul className="space-y-2 md:space-y-3 mb-6 md:mb-8" style={{ color: '#706363' }}>
-                                    <li className="flex items-center justify-center">
-                                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" style={{ color: '#98ada4' }} />
-                                        <span className="text-xs md:text-sm">Evaluación familiar</span>
-                                    </li>
-                                    <li className="flex items-center justify-center">
-                                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" style={{ color: '#98ada4' }} />
-                                        <span className="text-xs md:text-sm">Dinámicas familiares</span>
-                                    </li>
-                                    <li className="flex items-center justify-center">
-                                        <CheckCircle className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" style={{ color: '#98ada4' }} />
-                                        <span className="text-xs md:text-sm">Fortalecimiento de vínculos</span>
-                                    </li>
-                                </ul>
+                        {/* Mobile: carrusel horizontal */}
+                        <div className="md:hidden w-full px-4 py-4 overflow-x-auto">
+                            <div className="flex gap-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
+                                {plans.map((plan, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex flex-col items-center justify-center text-center p-6 cursor-pointer active:scale-95 transition-transform rounded-xl shadow-lg flex-shrink-0 w-[85vw] snap-center border-2"
+                                        onClick={() => setSelectedPlan(plan)}
+                                        style={{ backgroundColor: '#f2e7dd', borderColor: '#e05353' }}
+                                    >
+                                        <h3 className="font-bold text-lg mb-2" style={{ color: '#5f0a3c' }}>{plan.name}</h3>
+                                        <p className="font-bold text-2xl mb-3" style={{ color: '#e05353' }}>{plan.price}</p>
+                                        <p className="text-sm leading-relaxed mb-4" style={{ color: '#706363' }}>{plan.description}</p>
+                                        <button
+                                            className="mt-auto w-full font-semibold py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg min-h-[48px] text-base"
+                                            style={{ background: 'linear-gradient(135deg, #e05353, #e05353)', color: '#f2e7dd' }}
+                                        >
+                                            Ver detalles
+                                        </button>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
@@ -385,6 +407,40 @@ export default function Services() {
                     </div>
                 </div>
             </section>
+
+            {/* Modal de detalle del plan */}
+            {selectedPlan && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50 p-4 md:p-0">
+                    <div className="rounded-2xl p-6 w-full max-w-md md:w-80 shadow-2xl relative border-2" style={{ backgroundColor: '#f2e7dd', borderColor: '#e05353', maxHeight: '90vh', overflowY: 'auto' }}>
+                        <button
+                            onClick={() => setSelectedPlan(null)}
+                            className="absolute top-4 right-4 z-20 p-2 bg-white/90 rounded-full shadow-lg hover:bg-white transition-all duration-300 transform hover:scale-110"
+                            style={{ color: '#e05353' }}
+                            aria-label="Cerrar modal"
+                        >
+                            <X className="w-6 h-6" />
+                        </button>
+
+                        {/* Header con gradiente */}
+                        <div className="rounded-xl p-4 mb-4 -m-2" style={{ background: 'linear-gradient(135deg, #e05353, #e05353)' }}>
+                            <h2 className="text-lg md:text-xl font-bold" style={{ color: '#f2e7dd' }}>{selectedPlan.name}</h2>
+                            <p className="text-base md:text-lg font-semibold" style={{ color: '#5f0a3c' }}>{selectedPlan.price}</p>
+                        </div>
+
+                        <p className="mb-6 leading-relaxed text-sm md:text-base" style={{ color: '#706363' }}>{selectedPlan.description}</p>
+
+                        <a
+                            href="https://wa.me/584246287530"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center w-full text-center font-semibold py-4 md:py-3 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[56px] text-base"
+                            style={{ background: 'linear-gradient(135deg, #e05353, #e05353)', color: '#f2e7dd' }}
+                        >
+                            Reservar Consulta
+                        </a>
+                    </div>
+                </div>
+            )}
 
             <WhatsAppWidget />
         </Layout>

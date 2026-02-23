@@ -248,12 +248,7 @@ export default function About() {
                                             <p className="font-semibold text-base md:text-lg" style={{ color: '#5f0a3c' }}>Magister Scientiarum en Psicología Clínica</p>
                                         </div>
                                     </li>
-                                    <li className="flex items-start">
-                                        <Award className="w-5 h-5 md:w-6 md:h-6 mr-3 mt-0.5 flex-shrink-0" style={{ color: '#e05353' }} />
-                                        <div>
-                                            <p className="font-semibold text-base md:text-lg" style={{ color: '#5f0a3c' }}>Psicólogo Clínico</p>
-                                        </div>
-                                    </li>
+                                    
                                     <li className="flex items-start">
                                         <Award className="w-5 h-5 md:w-6 md:h-6 mr-3 mt-0.5 flex-shrink-0" style={{ color: '#98ada4' }} />
                                         <div>
